@@ -1,36 +1,151 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 Todo App
 
-## Getting Started
+シンプルで使いやすいタスク管理アプリケーションです。直感的なインターフェースでタスクの作成、編集、削除、並び替えを行うことができます。
 
-First, run the development server:
+## ✨ 特徴
 
+- **タスク管理**: タスクの作成、編集、削除が簡単に行えます
+- **完了管理**: チェックボックスでタスクの完了状態を管理
+- **ドラッグ&ドロップ**: 直感的な操作でタスクの順序を変更
+- **レスポンシブデザイン**: デスクトップ・タブレット・モバイルに対応
+- **ダークモード**: システムの設定に応じて自動的に切り替え
+- **ローカルストレージ**: ブラウザにデータを自動保存
+- **スムーズなアニメーション**: 心地よいユーザーエクスペリエンス
+
+## 🛠️ 技術スタック
+
+- **Frontend**: Next.js 15.4.4 + React 19
+- **スタイリング**: Tailwind CSS v4
+- **言語**: TypeScript
+- **フォント**: Geist Sans & Geist Mono
+- **データ保存**: LocalStorage（ブラウザローカル）
+
+## 🚀 開発環境セットアップ
+
+### 前提条件
+- Node.js 18以上
+- npm または yarn
+
+### インストールと起動
+
+1. 依存関係のインストール
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. 開発サーバーの起動
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. ブラウザで [http://localhost:3000](http://localhost:3000) を開く
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### その他のコマンド
 
-## Learn More
+```bash
+# 本番ビルド
+npm run build
 
-To learn more about Next.js, take a look at the following resources:
+# 本番サーバー起動
+npm start
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# コードリント
+npm run lint
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📱 機能詳細
 
-## Deploy on Vercel
+### タスク作成
+- 上部のフォームにテキストを入力
+- 「追加」ボタンまたはEnterキーで追加
+- 最大200文字まで入力可能
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### タスク編集
+- タスクテキストをクリックして編集モード
+- Enterキーで保存、Escapeキーでキャンセル
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### タスク削除
+- 各タスクの削除ボタン（ゴミ箱アイコン）をクリック
+
+### タスク完了
+- チェックボックスをクリックして完了状態を切り替え
+- 完了済みタスクは半透明で表示
+
+### 並び替え
+- タスクをドラッグ&ドロップで順序変更
+- 直感的な操作で整理が可能
+
+### 統計表示
+- 合計タスク数
+- 完了済みタスク数
+- 未完了タスク数
+
+## 🎨 デザインコンセプト
+
+- **モダンでクリーン**: 余白を活用したスッキリとしたデザイン
+- **直感的操作**: 迷わず使える分かりやすいUI
+- **アクセシビリティ**: キーボード操作とスクリーンリーダーに配慮
+- **パフォーマンス**: Core Web Vitalsを意識した軽快な動作
+
+## 📂 プロジェクト構造
+
+```
+src/
+├── app/              # Next.js App Router
+│   ├── globals.css   # グローバルスタイル
+│   ├── layout.tsx    # ルートレイアウト
+│   └── page.tsx      # メインページ
+├── components/       # Reactコンポーネント
+│   ├── TodoApp.tsx   # メインアプリコンポーネント
+│   ├── TodoForm.tsx  # タスク追加フォーム
+│   ├── TodoList.tsx  # タスクリスト表示
+│   └── TodoItem.tsx  # 個別タスクアイテム
+└── types/           # TypeScript型定義
+    └── index.ts     # Todo型定義
+```
+
+## 💾 データ仕様
+
+### Todo型定義
+```typescript
+interface Todo {
+  id: string;        // 一意識別子
+  text: string;      // タスクテキスト
+  completed: boolean; // 完了状態
+  createdAt: Date;   // 作成日時
+}
+```
+
+### データ永続化
+- ブラウザのLocalStorageを使用
+- ページリロード後もデータが保持される
+- プライベートブラウジングモードでも動作
+
+## 🔧 カスタマイズ
+
+### テーマ色の変更
+`src/app/globals.css`のCSS変数を編集:
+
+```css
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+```
+
+### 最大文字数の変更
+各コンポーネントの`maxLength`プロパティを変更
+
+## 📚 参考資料
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [React Documentation](https://react.dev/)
+
+## 🐛 既知の問題
+
+現在、既知の問題はありません。問題を発見した場合は、Issueを作成してください。
+
+## 📄 ライセンス
+
+MIT License
